@@ -1,0 +1,173 @@
+---
+title: "Math Primer: Difference Equations and Ordinary Differential Equations (ODEs)"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## The mathematics of change - difference equations and ordinary differential equations (ODEs).
+
+This tutorial provides a brief introduction to the these two fundamental types of equations that are used to model change in many fields of science and engineering:
+
+-   *Ordinary differential equations* are used to model situations where the change is assumed to occur continuously over time or space. In the context of time, these equations relate the instantaneous rate of change of a system to its current state. This is formally expressed in the form of derivatives (e.g. $\tfrac{dy}{dt}=t^{2}$).
+-   *Difference equations* are used to model situations where the change can be assumed to occur at distinct points in time or space. In the context of time, these equations link the state of a mathematical system at the present time (often referred to as time $t$ ) to a future time (such as time $t+1$).
+
+These two representations of change are complementary, but the underlying mathematical framework and the tools that we use to manipulate them are different.
+
+### Example difference equations and ODEs for a simple system.
+
+Imagine that we have a biological process that changes over time, such as the depletion of a nutrient by a growing population of bacteria. We can represent this process mathematically as:
+
+$$\frac{dN}{dt}=-kN$$
+
+where $N$ is the (log) concentration of nutrient and $k$ is the rate constant for the depletion of the nutrient. This is an example of an ODE, because the rate of change of the nutrient concentration is assumed to be continuous over time.
+
+Now imagine that we have a similar biological process, but the nutrient is being consumed by a population of bacteria that grows in discrete steps. We can represent this process mathematically as:
+
+$$N_{t+1}=N_{t}-kN_{t}$$
+
+where $N_{t}$ is the concentration of nutrient at time $t$ and $N_{t+1}$ is the concentration of nutrient at the next time step. This is an example of a difference equation, because the rate of change of the nutrient concentration is assumed to be discrete.
+
+Although the dynamics of these systems are not identical (because the rate of change is assumed to be continuous in the ODE and discrete in the difference equation), they are related. In fact, the difference equation can be derived from the ODE by assuming that the rate of change is constant over a small time interval (e.g. $\Delta t$) and then rearranging the terms to give: $$\frac{N_{t+1}-N_{t}}{\Delta t}=-kN_{t}$$
+
+The key idea is that when the time interval $\Delta t$ is relatively small, the difference equation is a good approximation of the ODE. This is illustrated in the figure below, which shows the solution of the ODE (blue line) and the solution of the difference equation (red circles) for the same system with the same initial conditions and parameter values.
+
+```{r difference-equation-ode, fig.width=6, fig.height=4}
+# ODE Solver package
+library(deSolve)
+
+# Define the ODE (function for the derivative dN/dt).
+decay_ode <- function(t, N, k) {
+  dN <- -k * N
+  return(list(dN))
+}
+
+# Define the difference equation
+decay_diff <- function(N, k) {
+  N_next <- N - k * N
+  return(N_next)
+}
+
+# Initial conditions
+k <- 0.15
+t_start <- 0
+t_end <- 20
+t <- seq(t_start,t_end,0.01)
+N0 <- 100
+
+# Numerical solution of the ODE
+ode_sol <- ode(y = N0, times = t, func = decay_ode, parms = k)
+
+# Difference equation.
+deltaT <- 1
+steps <- (t_end - t_start) / deltaT + 1
+t_diff <- seq(t_start, t_end, deltaT)
+N_out <- rep(NA, steps)
+N_out[1] <- N0
+
+for(i in 2:steps){
+  N0 <- ifelse(i == 1, N0, N_out[i-1])
+  N_out[i] <- decay_diff(N0, k)
+}
+
+plot(ode_sol, type = "l", lwd = 2, col = "blue", xlab = "Time", ylab = "N", main="ODE (blue) vs. Difference Equation (red)")
+points(t_diff,N_out, pch = 16, col = "red")
+```
+
+```{r quiz1, echo = FALSE}
+quiz(caption = "Check Your Understanding",
+  question("What is a key distinction between difference equations and ODEs?",
+           answer("Difference equations represent discrete change, while ODEs represent continuous change", correct = TRUE),
+           answer("Difference equations represent continuous change, while ODEs represent discrete change"),
+           answer("Difference equations are linear, while ODEs are nonlinear"),
+           answer("Difference equations are solvable, while ODEs are not"),
+           allow_retry = TRUE
+  ),
+  question("Under what conditions can difference equations be good approximations of an ODE?",
+           answer("When the time interval is relatively small", correct = TRUE),
+           answer("When the time interval is relatively large"),
+           answer("When the time interval is zero"),
+           answer("When the time interval is infinite"),
+           allow_retry = TRUE
+  )
+)
+```
+
+## Differential Equations and Population Growth - the Exponential and Logistic models
+
+### The Exponential Model
+
+### The Logistic Model
+
+### Adding Migration
+
+## Difference Equation Approximations for Population Growth
+
+### The Exponential Model
+
+### The Logistic Model
+
+## Exercises
+
+*Here's a simple exercise with an empty code chunk provided for entering the answer.*
+
+Write the R code required to add two plus two:
+
+```{r two-plus-two, exercise=TRUE}
+
+```
+
+### Exercise with Code
+
+*Here's an exercise with some prepopulated code as well as `exercise.lines = 5` to provide a bit more initial room to work.*
+
+Now write a function that adds any two numbers and then call it:
+
+```{r add-function, exercise=TRUE, exercise.lines = 5}
+add <- function() {
+  
+}
+```
+
+## Topic 2
+
+### Exercise with Hint
+
+*Here's an exercise where the chunk is pre-evaluated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
+
+Modify the following code to limit the number of rows printed to 5:
+
+```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
+mtcars
+```
+
+```{r print-limit-hint}
+head(mtcars)
+```
+
+### Quiz
+
+*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+
+Some questions to verify that you understand the purposes of various base and recommended R packages:
+
+```{r quiz}
+quiz(
+  question("Which package contains functions for installing other R packages?",
+    answer("base"),
+    answer("tools"),
+    answer("utils", correct = TRUE),
+    answer("codetools")
+  ),
+  question("Which of the R packages listed below are used to create plots?",
+    answer("lattice", correct = TRUE),
+    answer("tools"),
+    answer("stats"),
+    answer("grid", correct = TRUE)
+  )
+)
+```

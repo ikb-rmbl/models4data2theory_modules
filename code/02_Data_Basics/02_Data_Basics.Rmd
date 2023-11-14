@@ -1,0 +1,173 @@
+---
+title: "R Programming: Data basics"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    df_print: default
+runtime: shiny_prerendered
+description: >
+  Learn about the base data types in R. Explore R's data frames, and learn how
+  to interact with data frames and their columns.
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(dplyr)
+library(ggplot2)
+library(palmerpenguins)
+library(nycflights13)
+tutorial_options(exercise.timelimit = 60)
+```
+
+## Welcome
+
+In this tutorial, you will learn how to use R to inspect the contents of a data frame or tibble. Data frames and tibbles are R's structures for storing tabular data; if you inherit a tabular dataset in R, it will almost certainly come as one of these structures.
+
+Here, you will learn how to do three things with data frames and tibbles:
+
+1.  Look at the contents of a data frame or tibble
+2.  Open a help page that describes a data frame or tibble
+3.  Identify the variables and their types in a tibble
+
+You will also meet the `palmerpenguins` and `nycflights` datasets. These datasets appear frequently in R examples.
+
+The readings in this tutorial follow [*R for Data Science*](http://r4ds.had.co.nz/), sections 3.2 and 5.1.
+
+## Data frames
+
+### What is a data frame?
+
+A **data frame** is a rectangular collection of values, usually organized so that variables appear in the columns and observations appear in rows.
+
+Here is an example: the `penguins` data frame contains observations collected and published by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) from [Palmer Station](https://pallter.marine.rutgers.edu/), a long-term environmental research site in Antarctica. The data frame contains 344 rows and 8 columns. Each row represents a penguin, and each column represents a variable that describes the penguin. Each penguin is one of three different species.
+
+![The three different penguin species in the \`palmerpenguins\` datasets (credit: Allison Horst)](images/lter_penguins.png)
+
+```{r penguins-setup}
+data(package = 'palmerpenguins')
+```
+
+```{r penguins, exercise = TRUE}
+penguins
+```
+
+::: {#mpg-hint}
+**Hint:** Type `penguins` and then click the Run Code button.
+:::
+
+### A note about palmerpenguins
+
+The code above worked because I've already loaded the `palmerpenguins` package for you in this tutorial: `penguins` comes in the palmerpenguins package. If you would like to look at `penguins` on your own computer, you will need to first load palmerpenguins. You can do that in two steps:
+
+1.  Run `install.packages('palmerpenguins')` to install palmerpenguins if you do not yet have it.
+2.  Load the package with the `library(palmerpenguins)` command.
+3.  Run the command `data(package = 'palmerpenguins')` to load the `penguins` data frame into your R session.
+
+After that, you will be able to access any dataset contained in the palmerpenguins package---until you close R.
+
+### One thing to notice
+
+Did you notice how much information was inside `penguins`? Me too. Sometimes the contents of a data frame are hard to interpret. Let's get some help with this...
+
+## Help pages
+
+### How to open a help page
+
+You can learn more about `penguins` by opening its help page. The help page will explain where the `palmerpenguins` dataset comes from and what each variable in the `penguins` data frame describes. To open the help page, type `?penguins` in the code chunk below and then click "Run Code".
+
+```{r help, exercise = TRUE}
+
+```
+
+::: {#help-hint}
+**Hint:** Type `?penguins` and then click the Run Code button.
+:::
+
+### ? syntax
+
+You can open a help page for any object that comes with R or with an R package. To open the help page, type a `?` before the object's name and then run the command, as you did with `?penguins`. This technique works for functions, packages, and more. If you want to specify getting help for a function or dataset in a particular package, you can use the `::` operator. For example, `?dplyr::filter` will open the help page for the `filter()` function in the `dplyr` package.
+
+Notice that objects created by you or your colleagues will not have a help page (unless you make one).
+
+### Exercises
+
+Use the code chunk below to answer the following questions.
+
+```{r exercises1, exercise = TRUE}
+
+```
+
+```{r quiz1, echo = FALSE}
+quiz(caption = "Quiz",
+  question("What does the `bill_depth_mm` variable of `penguins` describe?  Read the help for `?penguins` to find out.",
+           answer("The depth below the surface that the penguin dives to catch fish"),
+           answer("The species of penguin"),
+           answer("The distance across the bill from the chin to the top of the bill", correct = TRUE),
+           allow_retry = TRUE
+  ),
+  question("How many rows are in the data frame named `penguins`?",
+           answer("34"),
+           answer("300"),
+           answer("344", correct = TRUE),
+           answer("3344"),
+           incorrect = "Incorrect.\nHint: R numbers the rows of a data frame when it displays the contents of a data frame. As a result, you can spot the number of rows in `penguins` by examining `penguins` in the code block above.",
+           allow_retry = TRUE
+  ),
+  question("How many columns are in the data frame named `cars`?",
+           answer("1"),
+           answer("2"),
+           answer("4"),
+           answer("8", correct = TRUE),
+           incorrect = "Incorrect.\nHint: If you inspect the contents of `penguins` in the code block above, it should be pretty easy to find the number of columns.",
+           allow_retry = TRUE
+  )
+)
+```
+
+## Data types
+
+### Type codes
+
+```{r types, echo = FALSE}
+penguins
+```
+
+Did you notice that a row of three (or four) letter abbreviations appears under the column names of `penguins`? These abbreviations describe the *type* of data that is stored in each column of `penguins`:
+
+-   `int` stands for integers.
+
+-   `dbl` stands for doubles, or real numbers.
+
+-   `chr` stands for character vectors, or strings.
+
+-   `dttm` stands for date-times (a date + a time).
+
+There are three other common types of variables that aren't used in this dataset but are used in other datasets:
+
+-   `lgl` stands for logical, vectors that contain only `TRUE` or `FALSE`.
+
+-   `fctr` stands for factors, which R uses to represent categorical variables with fixed possible values.
+
+-   `date` stands for dates.
+
+This row of data types is unique to tibbles and is one of the ways that tibbles try to be more user-friendly than data frames.
+
+### Test your knowledge
+
+```{r quiz2, echo=FALSE}
+question("Which types of variables does `penguins` contain? Check all that apply.",
+         type = "multiple",
+         allow_retry = TRUE,
+         incorrect = "Not quite right. Look a little closer at `penguins`.",
+         answer("integers", correct = TRUE),
+         answer("doubles", correct = TRUE),
+         answer("factors", correct = TRUE),
+         answer("characters", correct = TRUE),
+         correct = "Great Job!"
+)
+```
+
+### Congratulations
+
+You've met R's basic table structures and you have learned how to inspect their contents. When you are ready, go on to the next tutorial.
