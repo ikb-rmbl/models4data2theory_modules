@@ -135,13 +135,6 @@ quiz(caption = "Quiz - Working with Packages",
     answer("Only once. Afterwards, R can find it on your hard drive as needed.", correct = TRUE),
     answer("Never, as long as you are connected to the internet.", message = "This could be true if you are using R over a cloud service. However, if you are using R locally on your own computer, you will need to install each package that you use on your computer."),
     allow_retry = TRUE
-  ),
-  question("What is the tidyverse?",
-    answer("A collection of packages that work well together and provide tools for common data science tasks.", correct = TRUE, message = 'You can install all of the tidyverse packages at once with `install.packages("tidyverse")`.'),
-    answer("A word processing program for R"),
-    answer("A code style that reads like poetry"),
-    answer("An alternate universe where everyone is an R programmer."),
-    allow_retry = TRUE
   )
 )
 ```
