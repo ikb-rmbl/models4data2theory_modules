@@ -14,7 +14,7 @@
 <meta name="allow-skip" content="true" />
 <meta name="learnr-version-prerender" content="0.11.5" />
 
-<title>Set Up</title>
+<title>R Programming: Set Up</title>
 
 <!-- header-includes START -->
 <!-- HEAD_CONTENT -->
@@ -111,17 +111,19 @@ if (window.hljs) {
 
 <div id="section-welcome" class="section level2">
 <h2>Welcome</h2>
-<p>This is a demo tutorial. Compare it to the <a
-href="https://github.com/rstudio/learnr/tree/main/inst/tutorials/ex-setup-r/ex-setup-r.Rmd">source
-code</a> that made it.</p>
+<p>This is a tutorial on how to install the R language and RStudio
+development environment. This tutorial was modified from <a
+href="https://github.com/rstudio/learnr/tree/main/inst/tutorials/ex-setup-r/ex-setup-r.Rmd">here</a>
+that made it.</p>
 <div id="section-outline" class="section level3">
 <h3>Outline</h3>
 <p>This tutorial will help you set up your computer to use R. It is for
-you if you need to:</p>
+you if you need to learn how to:</p>
 <ul>
 <li>Install R on your computer</li>
 <li>Install the RStudio IDE</li>
-<li>Install the <code>tidyverse</code> R package</li>
+<li>Install packages, using the <code>dplyr</code> R package as an
+example.</li>
 </ul>
 <p>You can skip this tutorial if you’ve already done these things.</p>
 </div>
@@ -247,14 +249,6 @@ you use it!</p>
 <script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
 </div>
 </div>
-<div class="panel panel-default tutorial-question-container">
-<div data-label="names-3" class="tutorial-question panel-body">
-<div id="names-3-answer_container" class="shiny-html-output"></div>
-<div id="names-3-message_container" class="shiny-html-output"></div>
-<div id="names-3-action_button_container" class="shiny-html-output"></div>
-<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
-</div>
-</div>
 <p>
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
@@ -283,22 +277,22 @@ session$onSessionEnded(function() {
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "quiz1", question = structure("Check all that you have NOT done:", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_6c09e40", 
+"character")), answers = list(structure(list(id = "lnr_ans_f0e5ba9", 
     option = "installed R on my computer", value = "installed R on my computer", 
     label = structure("installed R on my computer", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("<ul>\n<li>Install R<\u002fli>\n<\u002ful>\n", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_68dd266", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_57dc629", 
     option = "installed the RStudio IDE", value = "installed the RStudio IDE", 
     label = structure("installed the RStudio IDE", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("<ul>\n<li>Install RStudio IDE<\u002fli>\n<\u002ful>\n", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_980b5c4", 
-    option = "installed the tidyverse R package", value = "installed the tidyverse R package", 
-    label = structure("installed the tidyverse R package", html = TRUE, class = c("html", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d055c8", 
+    option = "installed the dplyr R package", value = "installed the dplyr R package", 
+    label = structure("installed the dplyr R package", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("<ul>\n<li>Install Packages<\u002fli>\n<\u002ful>\n", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_3e0eb76", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_ebb1aea", 
     option = "None of the above. I've done them all.", value = "None of the above. I've done them all.", 
     label = structure("None of the above. I’ve done them all.", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("You can skip this tutorial!", html = TRUE, class = c("html", 
@@ -310,7 +304,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
 "character")), incorrect = structure("This tutorial is here to help! To get set up read:", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "quiz1-answer", question = "quiz1"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = FALSE, seed = 2164061.99899228, 
+    random_answer_order = FALSE, allow_retry = FALSE, seed = 839151436.60924, 
     options = list()), class = c("learnr_checkbox", "tutorial_question"
 )), session = session)
 </script>
@@ -318,11 +312,11 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz2-1", question = structure("Is R free to download and use?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_bc8da7a", 
+"character")), answers = list(structure(list(id = "lnr_ans_c8deab7", 
     option = "Yes!", value = "Yes!", label = structure("Yes!", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("R is free <em>and<\u002fem> open source, which means that anyone can read, use, and copy the source code of the R language.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_770c6c0", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_74c5ee3", 
     option = "No.", value = "No.", label = structure("No.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -332,29 +326,29 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "quiz2-1-answer", question = "quiz2-1"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = FALSE, seed = 1189334467.44617, 
+    random_answer_order = FALSE, allow_retry = FALSE, seed = 1942374120.09551, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz2-2", question = structure("Where do you download R?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_117d42a", 
+"character")), answers = list(structure(list(id = "lnr_ans_5325bc1", 
     option = "www.rstudio.com/download", value = "www.rstudio.com/download", 
     label = structure("<a href=\"http://www.rstudio.com/download\">www.rstudio.com/download<\u002fa>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_8fc37bd", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_5711291", 
     option = "[cloud.r-project.org](http://cloud.r-project.org)", 
     value = "[cloud.r-project.org](http://cloud.r-project.org)", 
     label = structure("<a href=\"http://cloud.r-project.org\">cloud.r-project.org<\u002fa>", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("You can also download R from <a href=\"http://cran.r-project.org\">cran.r-project.org<\u002fa>", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_179bcc9", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d656e0f", 
     option = "www.r-project.org", value = "www.r-project.org", 
     label = structure("<a href=\"http://www.r-project.org\">www.r-project.org<\u002fa>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("Good try, but not exactly. <a href=\"http://www.r-project.org\">www.r-project.org<\u002fa> doesn’t provide a download link, but it does provide a link to one the websites above.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_c87d866", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_8c0572f", 
     option = "www.r.com", value = "www.r.com", label = structure("<a href=\"http://www.r.com\">www.r.com<\u002fa>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -364,7 +358,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "quiz2-2-answer", question = "quiz2-2"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 1494193242.30421, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 1146948063.46591, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
@@ -372,17 +366,17 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz2-3", question = structure("How often should you update R?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_6f49d6c", 
+"character")), answers = list(structure(list(id = "lnr_ans_40f5a7d", 
     option = "Everytime you use it", value = "Everytime you use it", 
     label = structure("Everytime you use it", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("This will be too often unless you use R very rarely!", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_ca7a510", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_6785622", 
     option = "About once a year", value = "About once a year", 
     label = structure("About once a year", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("A new version of R is released about once a year. Update sooner if you encounter a bug that you cannot explain.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_89aad50", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_4d62c84", 
     option = "Never", value = "Never", label = structure("Never", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("A new version of R is released about once a year. I’ll assume that you are using the newest version of R, which will be the fastest version with the fewest unexpected behaviors.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
@@ -393,30 +387,30 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "quiz2-3-answer", question = "quiz2-3"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 2072816580.03477, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 1951940334.09106, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz3-1", question = structure("What is the RStudio IDE?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_5ab5e34", 
+"character")), answers = list(structure(list(id = "lnr_ans_4e7321e", 
     option = "An application that makes it easier to use R.", 
     value = "An application that makes it easier to use R.", 
     label = structure("An application that makes it easier to use R.", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("RStudio organizes your workspace and makes it easier to write, use, debug, and save R code. I highly recommend it and will rely on the RStudio IDE in several tutorials.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_f2b0afc", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_cb21466", 
     option = "An application that let's you use R without writing any code", 
     value = "An application that let's you use R without writing any code", 
     label = structure("An application that let’s you use R without writing any code", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("And thank goodness! Code provides a reproducible record of your work, which is essential for data science.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_c147d7d", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_8ee2b64", 
     option = "A spreadsheet program like Microsoft Excel.", value = "A spreadsheet program like Microsoft Excel.", 
     label = structure("A spreadsheet program like Microsoft Excel.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_6ad57dd", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_2fac204", 
     option = "Another name for R", value = "Another name for R", 
     label = structure("Another name for R", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("R and RStudio are two separate things. R is a language, like English. Think of RStudio as a program that helps you use the language, kind of like how a word processing program helps you write in English.", html = TRUE, class = c("html", 
@@ -428,7 +422,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "quiz3-1-answer", question = "quiz3-1"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 59869748.972121, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 797577450.128599, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
@@ -436,11 +430,11 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz3-2", question = structure("Is the RStudio IDE free to download and use?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_4849a4c", 
+"character")), answers = list(structure(list(id = "lnr_ans_c56b21b", 
     option = "Yes!", value = "Yes!", label = structure("Yes!", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("Like R, RStudio is free and open-source. There do exist professional versions of RStudio with enhanced features, but we will not rely on those features in these tutorials.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_bf1b9d", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_32435b8", 
     option = "No.", value = "No.", label = structure("No.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("Like R, RStudio is free and open-source. There do exist professional versions of RStudio with enhanced features, but we will not rely on those features in these tutorials.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
@@ -451,29 +445,29 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "quiz3-2-answer", question = "quiz3-2"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = FALSE, seed = 281875259.868742, 
+    random_answer_order = FALSE, allow_retry = FALSE, seed = 1866853654.63068, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz3-3", question = structure("Where do you download RStudio?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_fd3ef6b", 
+"character")), answers = list(structure(list(id = "lnr_ans_c6aa3e1", 
     option = "www.rstudio.com/download", value = "www.rstudio.com/download", 
     label = structure("<a href=\"http://www.rstudio.com/download\">www.rstudio.com/download<\u002fa>", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("For these tutorials, download and install the RStudio Desktop Open Source License.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_151f41", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_2013e21", 
     option = "[cloud.r-project.org](http://cloud.r-project.org)", 
     value = "[cloud.r-project.org](http://cloud.r-project.org)", 
     label = structure("<a href=\"http://cloud.r-project.org\">cloud.r-project.org<\u002fa>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("This is where you download R, not RStudio.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_b718936", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_2b4ab4c", 
     option = "www.r-project.org", value = "www.r-project.org", 
     label = structure("<a href=\"http://www.r-project.org\">www.r-project.org<\u002fa>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_eb56925", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_5dfab8b", 
     option = "[cran.rstudio.org](http://cran.rstudio.org)", value = "[cran.rstudio.org](http://cran.rstudio.org)", 
     label = structure("<a href=\"http://cran.rstudio.org\">cran.rstudio.org<\u002fa>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
@@ -484,7 +478,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "quiz3-3-answer", question = "quiz3-3"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 2045363437.04755, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 374523330.825599, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
@@ -492,10 +486,10 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz3-4", question = structure("Do you need to install R if you already have RStudio?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_b05cb60", 
+"character")), answers = list(structure(list(id = "lnr_ans_2f178e", 
     option = "Yes.", value = "Yes.", label = structure("Yes.", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_37f3aa6", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_9585bc5", 
     option = "No.", value = "No.", label = structure("No.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("R does not come with RStudio; you need to install R separately.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
@@ -506,26 +500,26 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "quiz3-4-answer", question = "quiz3-4"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = FALSE, seed = 972220452.047275, 
+    random_answer_order = FALSE, allow_retry = FALSE, seed = 1909944740.11061, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "names-1", question = structure("What command do you use to install packages?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_8e95b9b", 
+"character")), answers = list(structure(list(id = "lnr_ans_2628fd9", 
     option = "`library()`", value = "`library()`", label = structure("<code>library()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("We will see what <code>library()<\u002fcode> does later.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_74a4756", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_b787ce5", 
     option = "`install.packages()`", value = "`install.packages()`", 
     label = structure("<code>install.packages()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_8bdc21c", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_f1ce04c", 
     option = "`install_packages()`", value = "`install_packages()`", 
     label = structure("<code>install_packages()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_9fa7fe1", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_f7c2268", 
     option = "There is no command. You must visit [cran.r-project.org](http://cran.r-project.org) and download packages manually.", 
     value = "There is no command. You must visit [cran.r-project.org](http://cran.r-project.org) and download packages manually.", 
     label = structure("There is no command. You must visit <a href=\"http://cran.r-project.org\">cran.r-project.org<\u002fa> and download packages manually.", html = TRUE, class = c("html", 
@@ -538,7 +532,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "names-1-answer", question = "names-1"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 1725655743.69643, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 1576542246.76587, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
@@ -546,20 +540,20 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "names-2", question = structure("How often do you need to install a package on your computer?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_8050e3", 
+"character")), answers = list(structure(list(id = "lnr_ans_d52a65c", 
     option = "Every time you restart R", value = "Every time you restart R", 
     label = structure("Every time you restart R", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_ff16de6", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_82677e8", 
     option = "Every time you restart your computer", value = "Every time you restart your computer", 
     label = structure("Every time you restart your computer", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_eb1f08c", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_cf1ad", 
     option = "Only once. Afterwards, R can find it on your hard drive as needed.", 
     value = "Only once. Afterwards, R can find it on your hard drive as needed.", 
     label = structure("Only once. Afterwards, R can find it on your hard drive as needed.", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_6d0d63d", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_7056e85", 
     option = "Never, as long as you are connected to the internet.", 
     value = "Never, as long as you are connected to the internet.", 
     label = structure("Never, as long as you are connected to the internet.", html = TRUE, class = c("html", 
@@ -572,40 +566,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "names-2-answer", question = "names-2"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 573994967.732713, 
-    options = list()), class = c("learnr_radio", "tutorial_question"
-)), session = session)
-</script>
- 
-<script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "names-3", question = structure("What is the tidyverse?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_6782d6d", 
-    option = "A collection of packages that work well together and provide tools for common data science tasks.", 
-    value = "A collection of packages that work well together and provide tools for common data science tasks.", 
-    label = structure("A collection of packages that work well together and provide tools for common data science tasks.", html = TRUE, class = c("html", 
-    "character")), correct = TRUE, message = structure("You can install all of the tidyverse packages at once with <code>install.packages(&quot;tidyverse&quot;)<\u002fcode>.", html = TRUE, class = c("html", 
-    "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_66672b3", 
-    option = "A word processing program for R", value = "A word processing program for R", 
-    label = structure("A word processing program for R", html = TRUE, class = c("html", 
-    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_7775f28", 
-    option = "A code style that reads like poetry", value = "A code style that reads like poetry", 
-    label = structure("A code style that reads like poetry", html = TRUE, class = c("html", 
-    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d6ff9eb", 
-    option = "An alternate universe where everyone is an R programmer.", 
-    value = "An alternate universe where everyone is an R programmer.", 
-    label = structure("An alternate universe where everyone is an R programmer.", html = TRUE, class = c("html", 
-    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
-"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
-"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
-"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
-"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
-"character")), message = NULL, post_message = NULL), ids = list(
-    answer = "names-3-answer", question = "names-3"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 395297160.315925, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 1111527889.9824, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
@@ -632,7 +593,8 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 
 <!-- begin doc-metadata -->
 <div id="doc-metadata">
-<h1 class="title toc-ignore" style="display:none;">Set Up</h1>
+<h1 class="title toc-ignore" style="display:none;">R Programming: Set
+Up</h1>
 </div>
 <!-- end doc-metadata -->
 

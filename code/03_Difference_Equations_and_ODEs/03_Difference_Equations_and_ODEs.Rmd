@@ -1,11 +1,10 @@
 ---
 title: "Math Primer: Difference Equations and Ordinary Differential Equations (ODEs)"
-output: learnr::tutorial
-runtime: shiny_prerendered
+output: webexercises::webexercises_default
 ---
 
 ```{r setup, include=FALSE}
-library(learnr)
+library(webexercises)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -78,96 +77,204 @@ plot(ode_sol, type = "l", lwd = 2, col = "blue", xlab = "Time", ylab = "N", main
 points(t_diff,N_out, pch = 16, col = "red")
 ```
 
-```{r quiz1, echo = FALSE}
-quiz(caption = "Check Your Understanding",
-  question("What is a key distinction between difference equations and ODEs?",
-           answer("Difference equations represent discrete change, while ODEs represent continuous change", correct = TRUE),
-           answer("Difference equations represent continuous change, while ODEs represent discrete change"),
-           answer("Difference equations are linear, while ODEs are nonlinear"),
-           answer("Difference equations are solvable, while ODEs are not"),
-           allow_retry = TRUE
-  ),
-  question("Under what conditions can difference equations be good approximations of an ODE?",
-           answer("When the time interval is relatively small", correct = TRUE),
-           answer("When the time interval is relatively large"),
-           answer("When the time interval is zero"),
-           answer("When the time interval is infinite"),
-           allow_retry = TRUE
-  )
-)
-```
+::: {.webex-check .webex-box}
+### Check your understanding
 
-## Differential Equations and Population Growth - the Exponential and Logistic models
+```{r quiz1, results='asis'}
+opts <- c(answer = "Difference equations represent discrete change, while ODEs represent continuous change",
+                   "Difference equations represent continuous change, while ODEs represent discrete change",
+                   "Difference equations are linear, while ODEs are nonlinear",
+                   "Difference equations are solvable, while ODEs are not")
+
+cat("What is a key distinction between difference equations and ODEs?", longmcq(opts))
+
+opts2 <- c(answer = "When the time interval is relatively small",
+                    "When the time interval is relatively large",
+                    "When the time interval is zero",
+                    "When the time interval is infinite")
+cat("Under what conditions can difference equations be good approximations of an ODE?",longmcq(opts2))
+```
+:::
+
+## Ordinary Differential Equations and Population Growth - the Exponential and Logistic models
+
+Biological populations grow and decline over time, and the dynamics of these changes can be modeled using ordinary differential equations. In this section, we will explore two of the most common models of population growth - the exponential model and the logistic model. Both of these models are fundamentally nonlinear, reflecting the fact that the rate of population growth is not constant over time. However, they differ in the way that they represent the dynamics of population growth.
 
 ### The Exponential Model
 
+The exponential model is the simplest model of population growth, and it is based on the assumption that the rate of growth is proportional to the current population size. The intuition behind this assumption is that adding additional individuals to the population also increases the populations ability to make additional offspring. This assumption is reasonable when the population is small relative to the ability of the environment to support additional individuals, and when the population is growing rapidly. The exponential model is represented mathematically as an ODE:
+
+$$\frac{dN}{dt}=rN$$
+
+where $N$ is the population size and $r$ is the intrinsic rate of population growth. The figure below shows the solution to the exponential model for a population with an initial size of 100 individuals and an intrinsic rate of population growth of 0.15 individuals per time step.
+
+```{r exponential-model, fig.width=6, fig.height=4}
+# ODE Solver package
+library(deSolve)
+
+# Define the ODE (function for the derivative dN/dt).
+exp_ode <- function(t, N, r) {
+  dN <- r * N
+  return(list(dN))
+}
+
+# Initial conditions
+r <- 0.15
+t_start <- 0
+t_end <- 25
+t <- seq(t_start,t_end,0.01)
+N0 <- 100
+
+# Numerical solution of the ODE
+ode_sol <- ode(y = N0, times = t, func = exp_ode, parms = r)
+
+plot(ode_sol, type = "l", lwd = 2, col = "slateblue", xlab = "Time", ylab = "N", main="Exponential Model",
+     ylim=c(100,2000))
+
+```
+
+The exponential growth ODE is simple enough to have an [analytical solution](). This means that we can directly solve for the population size $N$ at any time $t$ without having to use a numerical solver. The analytical solution to the exponential growth ODE is:
+
+$$N(t)=N_{0}e^{rt}$$
+
+where $N_{0}$ is the initial population size.
+
 ### The Logistic Model
 
-### Adding Migration
+The logistic model is a more realistic model of population growth than the exponential model, because it incorporates the idea that the rate of population growth is limited by the carrying capacity of the environment. The carrying capacity is the maximum population size that can be supported by the environment, and it is determined by the amount of resources available to the population. The logistic model is represented mathematically as an ODE:
+
+$$\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)$$
+
+where $N$ is the population size, $r$ is the intrinsic rate of population growth, and $K$ is the carrying capacity. The figure below shows the solution to the logistic model for a population with an initial size of 100 individuals, an intrinsic rate of population growth of 0.15 individuals per time step, and a carrying capacity of 1000 individuals.
+
+```{r logistic-model, fig.width=6, fig.height=4}
+# ODE Solver package
+library(deSolve)
+
+# Define the ODE (function for the derivative dN/dt).
+logistic_ode <- function(t, N, parms) {
+  r <- parms[1]
+  K <- parms[2]
+  dN <- r * N * (1 - N / K)
+  return(list(dN))
+}
+
+# Parameters and Initial conditions
+r <- 0.15
+K <- 1000
+t_start <- 0
+t_end <- 25
+t <- seq(t_start,t_end,0.01)
+N0 <- 100
+
+parms <- c(r=r, K=K)
+
+# Numerical solution of the ODE
+logistic_sol <- ode(y = N0, times = t, func = logistic_ode, parms = parms)
+
+# Plots both models
+plot(ode_sol, type = "l", lwd = 2, col = "slateblue", xlab = "Time", ylab = "N", main="Exponential vs. Logistic Model",
+     ylim=c(100,2000))
+points(logistic_sol, type = "l", lwd = 2, col = "orange", xlab = "Time", ylab = "N",
+     ylim=c(100,2000))
+points(t,rep(K,length(t)), type="l", lty=2, col= "black")
+legend("topleft", legend=c("Exponential Model","Logistic Model","Carrying Capacity, K"), col=c("slateblue","orange","black"), lty=c(1,1,2), cex=0.8)
+
+```
+
+The behavior of the logistic model is intuitive: when the population is small relative to the carrying capacity, $K$. The population grows similarly to the exponential model. As the population approaches the carrying capacity, however, population growth slows, and will approach but never reach the value of $K$.
+
+### Adding an Outside Influence (Migration) to the Logistic Model
+
+The models we've reviewed so-far assume a "closed" population, where individuals do not leave or arrive, but in nature this is rarely the case. We can extend the logistic model to include migration by adding another term to the ODE that represents the number of individuals that arrive to the population from outside the population. The ODE for the logistic model with migration is:
+
+$$\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)+m$$
+
+where $N$ is the population size, $r$ is the intrinsic rate of population growth, $K$ is the carrying capacity, and $m$ is the number of individuals that arrive to the population from outside it. You will note that this is identical to the logistic model above, except for the addition of the migration term. The figure below shows the solution to the logistic + migration model using the same parameters and initial conditions as the original logistic model, with a migration rate of 15 individuals per time step.
+
+```{r logistic-model-migration, fig.width=6, fig.height=4}
+# ODE Solver package
+library(deSolve)
+
+# Define the ODE (function for the derivative dN/dt).
+logistic_migration_ode <- function(t, N, parms) {
+  r <- parms[1]
+  K <- parms[2]
+  m <- parms[3]
+  dN <- r * N * (1 - N / K) + m
+  return(list(dN))
+}
+
+# Parameters and Initial conditions
+r <- 0.15
+K <- 1000
+m <- 15
+t_start <- 0
+t_end <- 25
+t <- seq(t_start,t_end,0.01)
+N0 <- 100
+
+parms <- c(r=r, K=K, m=m)
+
+# Numerical solution of the ODE
+migration_sol <- ode(y = N0, times = t, func = logistic_migration_ode, parms = parms)
+
+# Plots both models
+plot(ode_sol, type = "l", lwd = 2, col = "slateblue", xlab = "Time", ylab = "N", 
+     main="Logistic Model with In-migration", ylim=c(100,2000))
+points(logistic_sol, type = "l", lwd = 2, col = "orange", xlab = "Time", ylab = "N",
+     ylim=c(100,2000))
+points(migration_sol, type = "l", lwd = 2, col = "green", xlab = "Time", ylab = "N",
+     ylim=c(100,2000))
+points(t,rep(K,length(t)), type="l", lty=2, col= "black")
+legend("topleft", legend=c("Exponential Model","Logistic Model","Logistic + in-migration", "Carrying Capacity, K"), col=c("slateblue","orange","green","black"), lty=c(1,1,1,2), cex=0.8)
+```
+
+Note that the population size in the logistic + migration model is always larger than the logistic model, and approaches the carrying capacity more quickly. This is because the migration term adds individuals to the population, increasing the population size relative to the logistic model. As the population approaches the carrying capacity, the additional migrating individuals will keep the maximum population size above the carrying capacity.
+
+::: {.webex-check .webex-box}
+### Check your understanding
+
+```{r quiz2, results='asis'}
+opts <- c(answer = "As the size of the population grows, the number of reproductive individuals added to the population each time step increases.",
+                  "As the size of the population grows, the number of reproductive individuals added to the population each time step decreases.",
+                  "More individuals are attracted to the larger population, increasing in-migration as the population size grows",
+                  "The rate of population growth is constant over time in the exponential model")
+
+cat("Why does the rate of population growth accelerate over time in the exponential model?", longmcq(opts))
+
+opts <- c(answer = "The net population growth rate. The number of new individuals born in the population each time step, minus the number of individuals that die.",
+                  "The number of new individuals born in the population at each time step.",
+                  "The number of new individuals born in the population at each time step, plus the number of individuals that die.",
+                  "The number of migrants that arrive in the population each time step.")
+
+cat("In both exponential and logistic models, what does the population growth rate, r, represent?", longmcq(opts))
+
+```
+:::
 
 ## Difference Equation Approximations for Population Growth
 
-### The Exponential Model
+In the above examples, we used ordinary differential equations to model exponential and logistic population growth. However, we can also use difference equation approximations to solve these models. Remember that the difference equation approach is a discrete-time approximation of the continuous-time ODE. When would it be desirable to use a difference equation approximation instead of the ODE? One example is when we have data on the population size at discrete time steps, but not continuous data on the population size. Another example is when we want to simulate the population growth model in a computer program. In this case, we can use the difference equation approximation to simulate the population growth model.
 
-### The Logistic Model
+Recall that the derivative of a function over time is defined as:
 
-## Exercises
+$$\frac{df}{dt}=\lim_{\Delta t\to 0}\frac{f(t+\Delta t)-f(t)}{\Delta t}$$
+This means that as the time interval $\Delta t$ approaches zero, the derivative of the function $f(t)$ is equal to the difference between the function evaluated at time $t+\Delta t$ and the function evaluated at time $t$, divided by the time interval $\Delta t$. We can rearrange this equation to solve for $f(t+\Delta t)$:
 
-*Here's a simple exercise with an empty code chunk provided for entering the answer.*
+$$f(t+\Delta t)=f(t)+\frac{df}{dt}\Delta t$$
+This equation is the basis for the difference equation approximation of the ODE. We can approximate the derivative of the function $f(t)$ as the difference between the function evaluated at time $t+\Delta t$ and the function evaluated at time $t$, divided by the time interval $\Delta t$. We can then rearrange the equation to solve for $f(t+\Delta t)$, which is the value of the function at the next time step.
 
-Write the R code required to add two plus two:
+...additional details on difference equation approximations...
 
-```{r two-plus-two, exercise=TRUE}
+### The Logistic Difference Model
 
-```
+We can use the difference equation approximation to solve the logistic model. Recall that the logistic model is defined by the ODE:
 
-### Exercise with Code
+$$\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)$$
+...additional details on difference equation approximation...
 
-*Here's an exercise with some prepopulated code as well as `exercise.lines = 5` to provide a bit more initial room to work.*
 
-Now write a function that adds any two numbers and then call it:
+### Check your understanding
 
-```{r add-function, exercise=TRUE, exercise.lines = 5}
-add <- function() {
-  
-}
-```
-
-## Topic 2
-
-### Exercise with Hint
-
-*Here's an exercise where the chunk is pre-evaluated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
-
-Modify the following code to limit the number of rows printed to 5:
-
-```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
-mtcars
-```
-
-```{r print-limit-hint}
-head(mtcars)
-```
-
-### Quiz
-
-*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
-
-Some questions to verify that you understand the purposes of various base and recommended R packages:
-
-```{r quiz}
-quiz(
-  question("Which package contains functions for installing other R packages?",
-    answer("base"),
-    answer("tools"),
-    answer("utils", correct = TRUE),
-    answer("codetools")
-  ),
-  question("Which of the R packages listed below are used to create plots?",
-    answer("lattice", correct = TRUE),
-    answer("tools"),
-    answer("stats"),
-    answer("grid", correct = TRUE)
-  )
-)
-```
+## Exercises for Difference Equations and ODEs
